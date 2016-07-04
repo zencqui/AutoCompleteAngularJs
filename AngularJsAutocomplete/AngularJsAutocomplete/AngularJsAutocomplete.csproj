@@ -128,27 +128,8 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CarApiController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Product.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Product.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Product.cs">
-      <DependentUpon>Product.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Product.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Product.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Product1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Product.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -940,23 +921,6 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
-    <EntityDeploy Include="Models\Product.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Product.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Product.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Product.edmx</DependentUpon>
-      <LastGenOutput>Product.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Product.edmx.diagram">
-      <DependentUpon>Product.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\Product.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Product.edmx</DependentUpon>
-      <LastGenOutput>Product1.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\angular-aria\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate\angular-animate.min.js.map" />
     <None Include="Scripts\jquery-3.0.0.intellisense.js" />
@@ -980,6 +944,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
