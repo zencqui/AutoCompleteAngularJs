@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EdmundsDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="EdmundsDbModelStoreContainer">
+          <EntitySet Name="Makes" EntityType="EdmundsDbModel.Store.Makes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Models" EntityType="EdmundsDbModel.Store.Models" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Years" EntityType="EdmundsDbModel.Store.Years" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Models_Makes" Association="EdmundsDbModel.Store.FK_Models_Makes">
+            <End Role="Makes" EntitySet="Makes" />
+            <End Role="Models" EntitySet="Models" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Years_Models" Association="EdmundsDbModel.Store.FK_Years_Models">
+            <End Role="Models" EntitySet="Models" />
+            <End Role="Years" EntitySet="Years" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Makes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="NiceName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Models">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="MakeId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="NiceName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Years">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Years" Type="int" />
+          <Property Name="ModelId" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Models_Makes">
+          <End Role="Makes" Type="EdmundsDbModel.Store.Makes" Multiplicity="1" />
+          <End Role="Models" Type="EdmundsDbModel.Store.Models" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Makes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Models">
+              <PropertyRef Name="MakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Years_Models">
+          <End Role="Models" Type="EdmundsDbModel.Store.Models" Multiplicity="0..1" />
+          <End Role="Years" Type="EdmundsDbModel.Store.Years" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Models">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Years">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EdmundsDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EdmundsDbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Makes" EntityType="EdmundsDbModel.Make" />
+          <EntitySet Name="Models" EntityType="EdmundsDbModel.Model" />
+          <EntitySet Name="Years" EntityType="EdmundsDbModel.Year" />
+          <AssociationSet Name="FK_Models_Makes" Association="EdmundsDbModel.FK_Models_Makes">
+            <End Role="Make" EntitySet="Makes" />
+            <End Role="Model" EntitySet="Models" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Years_Models" Association="EdmundsDbModel.FK_Years_Models">
+            <End Role="Model" EntitySet="Models" />
+            <End Role="Year" EntitySet="Years" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Make">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="NiceName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Models" Relationship="EdmundsDbModel.FK_Models_Makes" FromRole="Make" ToRole="Model" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="MakeId" Nullable="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NiceName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Make" Relationship="EdmundsDbModel.FK_Models_Makes" FromRole="Model" ToRole="Make" />
+          <NavigationProperty Name="Years" Relationship="EdmundsDbModel.FK_Years_Models" FromRole="Model" ToRole="Year" />
+        </EntityType>
+        <EntityType Name="Year">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="Years" />
+          <Property Type="String" Name="ModelId" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Model" Relationship="EdmundsDbModel.FK_Years_Models" FromRole="Year" ToRole="Model" />
+        </EntityType>
+        <Association Name="FK_Models_Makes">
+          <End Type="EdmundsDbModel.Make" Role="Make" Multiplicity="1" />
+          <End Type="EdmundsDbModel.Model" Role="Model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Make">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Model">
+              <PropertyRef Name="MakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Years_Models">
+          <End Type="EdmundsDbModel.Model" Role="Model" Multiplicity="0..1" />
+          <End Type="EdmundsDbModel.Year" Role="Year" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Year">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EdmundsDbModelStoreContainer" CdmEntityContainer="EdmundsDbEntities">
+          <EntitySetMapping Name="Makes">
+            <EntityTypeMapping TypeName="EdmundsDbModel.Make">
+              <MappingFragment StoreEntitySet="Makes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NiceName" ColumnName="NiceName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Models">
+            <EntityTypeMapping TypeName="EdmundsDbModel.Model">
+              <MappingFragment StoreEntitySet="Models">
+                <ScalarProperty Name="NiceName" ColumnName="NiceName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MakeId" ColumnName="MakeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Years">
+            <EntityTypeMapping TypeName="EdmundsDbModel.Year">
+              <MappingFragment StoreEntitySet="Years">
+                <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+                <ScalarProperty Name="Years" ColumnName="Years" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

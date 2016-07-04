@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1b05f963635a4493a8290e7a334984eb" Name="Diagram1">
+        <EntityTypeShape EntityType="EdmundsDbModel.Make" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EdmundsDbModel.Model" Width="1.5" PointX="3.125" PointY="0.875" />
+        <EntityTypeShape EntityType="EdmundsDbModel.Year" Width="1.5" PointX="6.125" PointY="2.375" />
+        <AssociationConnector Association="EdmundsDbModel.FK_Models_Makes" />
+        <AssociationConnector Association="EdmundsDbModel.FK_Years_Models" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
