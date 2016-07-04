@@ -13,11 +13,6 @@ namespace AngularJsAutocomplete.Business.Installers
         public void Install(Castle.Windsor.IWindsorContainer container, Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore store)
         {
             container.Register(
-                Component.For<IProductService>()
-                .ImplementedBy<ProductService>()
-                .LifestyleTransient());
-
-            container.Register(
                 Component.For<IEdmundApiService>()
                 .ImplementedBy<EdmundApiService>()
                 .LifestyleTransient());
